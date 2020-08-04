@@ -1,8 +1,6 @@
 import React from 'react';
 
-import Tag from '../tag/';
-
-import './last-searches-panel.css';
+import Tag from '../tag/tag';
 
 const LastSearchesPanel=()=>{
     return (

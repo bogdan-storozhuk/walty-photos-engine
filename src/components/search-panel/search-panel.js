@@ -2,7 +2,7 @@ import React from 'react';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 
-import Tag from '../tag/';
+import Tag from '../tag/tag.js';
 
 const SearchPanel=()=>{
     return(<Form className="mt-3">

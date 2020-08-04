@@ -1,7 +1,7 @@
 import React,{Component} from 'react';
 import styled from 'styled-components';
 
-import PixbayService from '../../services/pixbay-service';
+import PixbayService from '../../api/pixbay-service';
 
 
 const Image=styled.img`
