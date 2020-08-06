@@ -1,12 +1,12 @@
 import React from 'react';
 
-import Tag from '../tag/tag';
+import TagList from '../tag-list/tag-list';
 
 const LastSearchesPanel=()=>{
     return (
         <div>
             <p>3 last search</p>
-            <Tag/>
+            <TagList/>
         </div>)
 }
 

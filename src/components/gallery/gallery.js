@@ -1,36 +1,45 @@
-import React,{Component} from 'react';
-import styled from 'styled-components';
+import React, {Component} from 'react';
+import {connect} from 'react-redux';
 
-import PixbayService from '../../api/pixbay-service';
+import GalleryItem from '../gallery-item/gallery-item';
+import Spinner from '../spinner/spinner';
+import ErrorIndicator from '../error-indicator/error-indicator';
 
+const Gallery = ({photos}) =>{
+    return(
+        <div className="row mt-3">
+                    {
+                        photos.map((photo)=>{
+                            return (
+                                <GalleryItem key={photo.id} photo={photo}/>
+                            );
+                        })
+                    }
+        </div>
+    );
+}
 
-const Image=styled.img`
-width: 100%;
-height: 100%;
-`
-
-
-export default class Gallery extends Component{
-    state={photos:[]};
-    componentDidMount(){
-       const service=new PixbayService();
-        service.getPhotos().then(data=>{
-            this.setState({
-                photos:data.hits
-            })
-        });
-    }
+class GalleryContainer extends Component{
     
     render(){
-        console.log(this.state.photos);
-        const elements=this.state.photos.map((item)=>{
-            const {largeImageURL,id}=item;
-            return (
-                <div key={id} className="col-lg-3 col-md-4 col-6 mb-4">
-                    <Image src={largeImageURL} alt={id}></Image>
-                </div>
-            );
-        });
-    return(<div className="row mt-3">{elements}</div>);
+        const {photos, loading, error} = this.props;
+        if(loading){
+            return <Spinner/>
+        }
+
+        if(error){
+            return <ErrorIndicator/>
+        }
+
+        return <Gallery photos={photos}/>;
     }
 }
+
+const mapStateToProps = ({photos, loading, error}) =>{
+    return {
+        photos,
+        loading,
+        error
+    }
+}
+export default connect(mapStateToProps)(GalleryContainer);
