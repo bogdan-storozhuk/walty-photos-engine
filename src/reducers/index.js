@@ -4,7 +4,8 @@ const initialState = {
     photos: [],
     loading: false,
     error: null,
-    tags:[]
+    tags:[],
+    lastSearchedTags:[]
 }
 
 const reducer = (state = initialState, action) => {
@@ -35,6 +36,20 @@ const reducer = (state = initialState, action) => {
             return{
                 ...state,
                 tags:[...state.tags,newTag]
+            }
+        case 'TAG_REMOVED':
+            const numberInTagArray = action.payload;
+            return{
+                ...state,
+                tags:[...state.tags.slice(0,numberInTagArray),
+                      ...state.tags.slice(numberInTagArray+1)]
+            }
+        case 'LAST_SEARCHED_TAGS_ADDED':
+            const lastSearchedTags = action.payload;
+            console.log(lastSearchedTags);
+            return{
+                ...state,
+                lastSearchedTags
             }
         case 'LOAD_TAGS_FROM_URL':
             return{

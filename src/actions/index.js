@@ -15,6 +15,12 @@ const photosError = (error) => {
         payload: error
     }
 }
+const photoLoadStart = (tags) => {
+    return{
+        type:"FETCH_PHOTOS_START",
+        payload:tags
+    }
+}
 
 const tagAdded = (name) =>{
     return {
@@ -26,6 +32,20 @@ const tagAdded = (name) =>{
     }
 }
 
+const tagRemoved = (numberInTagArray) => {
+    return {
+        type: 'TAG_REMOVED',
+        payload: numberInTagArray
+    }
+}
+
+const lastSearchedTagAdded = (tags) => {
+    return {
+        type: 'LAST_SEARCHED_TAGS_ADDED',
+        payload: tags
+    }
+}
+
 const loadTagsFromURL = (tags) =>{
     return {
         type: 'LOAD_TAGS_FROM_URL',
@@ -33,15 +53,13 @@ const loadTagsFromURL = (tags) =>{
     }
 }
 
-const fetchPhotos = (pixbayApi,dispatch) => (tags) => {
-    dispatch(photosRequested());
-    pixbayApi.getPhotos(tags)
-        .then(data => dispatch(photosLoaded(data.hits)))
-        .catch((error)=>dispatch(photosError(error)));
-}
-
 export {
-    fetchPhotos,
+    photoLoadStart,
+    photosRequested,
+    photosLoaded,
+    photosError,
     tagAdded,
+    tagRemoved,
+    lastSearchedTagAdded,
     loadTagsFromURL
 };

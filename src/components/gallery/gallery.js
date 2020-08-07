@@ -1,5 +1,5 @@
-import React, {Component} from 'react';
-import {connect} from 'react-redux';
+import React from 'react';
+import {useSelector} from 'react-redux';
 
 import GalleryItem from '../gallery-item/gallery-item';
 import Spinner from '../spinner/spinner';
@@ -19,10 +19,10 @@ const Gallery = ({photos}) =>{
     );
 }
 
-class GalleryContainer extends Component{
-    
-    render(){
-        const {photos, loading, error} = this.props;
+const GalleryContainer = () => {
+    const photos = useSelector(state => state.photos),
+        loading = useSelector(state => state.loading),
+        error = useSelector(state => state.error);
         if(loading){
             return <Spinner/>
         }
@@ -32,14 +32,6 @@ class GalleryContainer extends Component{
         }
 
         return <Gallery photos={photos}/>;
-    }
 }
 
-const mapStateToProps = ({photos, loading, error}) =>{
-    return {
-        photos,
-        loading,
-        error
-    }
-}
-export default connect(mapStateToProps)(GalleryContainer);
+export default GalleryContainer;

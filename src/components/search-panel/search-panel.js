@@ -1,11 +1,13 @@
-import React,{Component} from 'react';
-import {connect} from 'react-redux';
+import React from 'react';
+import {useSelector, useDispatch} from 'react-redux';
 import {Link} from 'react-router-dom'
-import Form from 'react-bootstrap/Form';
 import styled from 'styled-components';
+import ReactTags from 'react-tag-autocomplete';
 
-import {tagAdded} from '../../actions';
-import TagList from '../tag-list/tag-list';
+import './search-panel.css';
+
+import {tagAdded, tagRemoved, lastSearchedTagAdded} from '../../actions';
+import getSuggestions from './suggestions';
 
 const StyledLink = styled(Link)`
     color: #008080de;
@@ -20,61 +22,41 @@ const StyledLink = styled(Link)`
     }
 `;
 
-class SearchPanel extends Component{
-
-    state={
-        label:''
-    }
-
-     onLabelChange = (e) => {
-        this.setState({
-            label: e.target.value
-        })
-     }
-
-     onSubmit = (e) => {
-         e.preventDefault();
-         if(this.state.label.length===0){
-             return;
-         }
-         const {label} = this.state;
-         this.props.onAddedToTags(label);
-         this.setState({
-            label:''
-        });
-     }
-
-    render(){
-        const {tags} = this.props;
-        const path=tags.reduce((sum,current)=>{
+const SearchPanel = () => {
+    const reactTags = React.createRef()
+    const dispatch = useDispatch();
+    const tags = useSelector(state => state.tags);
+    const path=tags.reduce((sum,current)=>{
             return sum+`${current.name}/`
-        },'/')
-        return(
-        <Form onSubmit={this.onSubmit} className="mt-3">
-            <Form.Group>
-                <Form.Control value={this.state.label} onChange={this.onLabelChange} size="lg" type="text" placeholder="Enter tags"/>
-            </Form.Group>
-            <div className="m-2">
-                <TagList/>
-            </div>
-            <div className="text-center">
-                    <StyledLink to={path}>
-                        Search
-                    </StyledLink>
-            </div>
-        </Form>);
+    },'/')
+
+    const onAddition = (tag) => {
+        dispatch(tagAdded(tag.name));
+      }
+
+    const onDelete = (i) => {
+        dispatch(tagRemoved(i));
     }
+    const onSearch = () =>{
+        const lastTags = tags.slice(-3);
+        dispatch(lastSearchedTagAdded(lastTags));
+    }
+
+    return(
+        <div className="mt-3">
+            <ReactTags
+            ref={reactTags}
+            tags={tags}
+            suggestions={getSuggestions()}
+            onDelete={onDelete}
+            onAddition={onAddition} />
+            <div className="text-center mt-4">
+                <StyledLink onClick={onSearch} to={path}>
+                    Search
+                </StyledLink>
+            </div>
+        </div>
+    );
 }
 
-const mapStateToProps = ({tags}) => {
-    return {
-        tags
-    }
-}
-
-const mapDispatchToProps = (dispatch) => {
-    return {
-        onAddedToTags: (label) =>{dispatch(tagAdded(label))}
-    }
-}
-export default connect(mapStateToProps,mapDispatchToProps)(SearchPanel);
+export default SearchPanel;
