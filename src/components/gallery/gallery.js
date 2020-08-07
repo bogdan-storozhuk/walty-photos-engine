@@ -1,9 +1,9 @@
 import React from 'react';
 import {useSelector} from 'react-redux';
 
-import GalleryItem from '../gallery-item/gallery-item';
-import Spinner from '../spinner/spinner';
-import ErrorIndicator from '../error-indicator/error-indicator';
+import {GalleryItem} from '../';
+import {Spinner} from '../';
+import {ErrorIndicator} from '../';
 
 const Gallery = ({photos}) =>{
     return(

@@ -3,8 +3,8 @@ import ReactDOM from 'react-dom';
 import {Provider} from 'react-redux';
 import {BrowserRouter as Router} from 'react-router-dom';
 
-import App from './components/app/app';
-import ErrorBoundry from './components/error-boundry/error-boundry';
+import {App} from './components/';
+import {ErrorBoundry} from './components/';
 import store from './store';
 
 ReactDOM.render(

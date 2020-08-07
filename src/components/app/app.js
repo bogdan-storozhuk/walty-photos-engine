@@ -2,7 +2,7 @@ import React from 'react';
 import {Route, Switch} from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-import MainPage from '../pages/main-page';
+import {MainPage} from '../';
 
 const App=()=>{
     return(

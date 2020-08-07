@@ -1,6 +1,7 @@
 import React,{Fragment} from 'react';
 import {useSelector} from 'react-redux';
-import Tag from '../tag/tag';
+
+import {Tag} from '../';
 
 const LastSearchesPanel=()=>{
     const lastSearchedTags = useSelector(state=>state.tagReducer.lastSearchedTags);
