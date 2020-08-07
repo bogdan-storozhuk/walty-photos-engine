@@ -20,9 +20,9 @@ const Gallery = ({photos}) =>{
 }
 
 const GalleryContainer = () => {
-    const photos = useSelector(state => state.photos),
-        loading = useSelector(state => state.loading),
-        error = useSelector(state => state.error);
+    const photos = useSelector(state => state.photoReducer.photos),
+        loading = useSelector(state => state.photoReducer.loading),
+        error = useSelector(state => state.photoReducer.error);
         if(loading){
             return <Spinner/>
         }

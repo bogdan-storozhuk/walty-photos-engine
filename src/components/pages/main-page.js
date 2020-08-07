@@ -2,7 +2,7 @@ import React, { useEffect} from 'react';
 import {useDispatch} from 'react-redux';
 import Container from 'react-bootstrap/Container';
 
-import {loadTagsFromURL,photoLoadStart} from '../../actions/'
+import {loadTagsFromURL, photoLoadStart} from '../../ducks/';
 import SearchPanel from '../search-panel/search-panel';
 import LastSearchesPanel from '../last-searches-panel/last-searches-panel'
 import PhotoContainer from '../gallery/gallery';

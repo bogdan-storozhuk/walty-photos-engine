@@ -3,15 +3,15 @@ import {useSelector} from 'react-redux';
 import Tag from '../tag/tag';
 
 const LastSearchesPanel=()=>{
-    const lastSearchedTags = useSelector(state=>state.lastSearchedTags);
+    const lastSearchedTags = useSelector(state=>state.tagReducer.lastSearchedTags);
     return (
         <Fragment>
             <p>3 last search</p>
             <div>
                 {
-                    lastSearchedTags.map((tagInfo)=>{
+                    lastSearchedTags.map((tag)=>{
                         return (
-                            <Tag key={tagInfo.id} name={tagInfo.name}/>
+                            <Tag key={tag.id} name={tag.name}/>
                         );
                     })
                 }

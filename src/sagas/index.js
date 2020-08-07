@@ -9,13 +9,13 @@ import {
     photosLoaded,
     photosRequested,
     photosError
-} from '../actions/';
+} from '../ducks/';
 
 const _apiBase = 'https://pixabay.com/api';
 const _apiKey = '17756679-c2c07b5492052af8ae388b0f5';
 
 function* watchFetchPhotos() {
-    yield takeEvery('FETCH_PHOTOS_START', fetchPhotosAsync);
+    yield takeEvery('walty-photo-engine/photos/LOAD_START', fetchPhotosAsync);
 }
 
 function* fetchPhotosAsync(action) {

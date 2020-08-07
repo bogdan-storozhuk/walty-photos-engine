@@ -6,7 +6,7 @@ import ReactTags from 'react-tag-autocomplete';
 
 import './search-panel.css';
 
-import {tagAdded, tagRemoved, lastSearchedTagAdded} from '../../actions';
+import {tagAdded, tagRemoved, lastSearchedTagAdded} from '../../ducks/';
 import getSuggestions from './suggestions';
 
 const StyledLink = styled(Link)`
@@ -23,12 +23,12 @@ const StyledLink = styled(Link)`
 `;
 
 const SearchPanel = () => {
-    const reactTags = React.createRef()
+    const reactTags = React.createRef();
     const dispatch = useDispatch();
-    const tags = useSelector(state => state.tags);
+    const tags = useSelector(state => state.tagReducer.tags);
     const path=tags.reduce((sum,current)=>{
             return sum+`${current.name}/`
-    },'/')
+    },'/');
 
     const onAddition = (tag) => {
         dispatch(tagAdded(tag.name));
