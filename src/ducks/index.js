@@ -6,6 +6,10 @@ import tagReducer, {
   tagRemoved,
   loadTagsFromURL,
   lastSearchedTagAdded,
+  TAG_ADD,
+  TAG_REMOVE,
+  TAGS_LOADED_FROM_URL,
+  LAST_SEARCHED_TAGS_ADDED,
 } from './tagReducer';
 import photoReducer, {
   photosLoaded,
@@ -13,6 +17,10 @@ import photoReducer, {
   photosError,
   photoLoadStart,
   watchFetchPhotos,
+  LOAD_START,
+  LOAD_REQUEST,
+  LOAD_SUCCESS,
+  LOAD_FAILURE,
 } from './photoReducer';
 
 export default combineReducers({
@@ -29,6 +37,16 @@ export {
   photosRequested,
   photosError,
   photoLoadStart,
+  photoReducer,
+  tagReducer,
+  LOAD_START,
+  LOAD_REQUEST,
+  LOAD_SUCCESS,
+  LOAD_FAILURE,
+  TAG_ADD,
+  TAG_REMOVE,
+  TAGS_LOADED_FROM_URL,
+  LAST_SEARCHED_TAGS_ADDED,
 };
 
 export function* rootSaga() {

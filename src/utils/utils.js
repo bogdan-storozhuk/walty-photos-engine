@@ -5,10 +5,20 @@ const deleteUndefinedValuesFromObject = (obj) => {
     }
   }
 };
+
 const transformObjectIntoArray = (obj) => {
   return Object.values(obj).map((item) => ({
     name: item,
     id: Date.now() + Math.floor(Math.random() * 1000),
   }));
 };
-export { deleteUndefinedValuesFromObject, transformObjectIntoArray };
+
+const generateRandomId = () => {
+  return Date.now() + Math.floor(Math.random() * 1000);
+};
+
+export {
+  deleteUndefinedValuesFromObject,
+  transformObjectIntoArray,
+  generateRandomId,
+};

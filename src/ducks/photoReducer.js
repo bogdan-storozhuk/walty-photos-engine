@@ -1,12 +1,13 @@
 import { call, put, takeEvery } from 'redux-saga/effects';
 
-const _apiBase = 'https://pixabay.com/api';
-const _apiKey = '17756679-c2c07b5492052af8ae388b0f5';
+import PixbayApi from '../api/';
 
-const LOAD_START = 'walty-photo-engine/photos/LOAD_START';
-const LOAD_REQUEST = 'walty-photo-engine/photos/LOAD_REQUEST';
-const LOAD_SUCCESS = 'walty-photo-engine/photos/LOAD_SUCCESS';
-const LOAD_FAILURE = 'walty-photo-engine/photos/LOAD_FAILURE';
+const pixbayApi = new PixbayApi();
+
+export const LOAD_START = 'walty-photo-engine/photos/LOAD_START';
+export const LOAD_REQUEST = 'walty-photo-engine/photos/LOAD_REQUEST';
+export const LOAD_SUCCESS = 'walty-photo-engine/photos/LOAD_SUCCESS';
+export const LOAD_FAILURE = 'walty-photo-engine/photos/LOAD_FAILURE';
 
 const initialState = {
   photos: [],
@@ -64,14 +65,7 @@ function* fetchPhotosAsync(action) {
   try {
     const tags = action.payload;
     yield put(photosRequested());
-    const data = yield call(async () => {
-      const tagsURL = tags.reduce((sum, current) => {
-        return sum + `${current.name} `;
-      }, '');
-      const res = await fetch(`${_apiBase}/?key=${_apiKey}&q=${tagsURL}&image_type=photo&
-            per_page=${20}&safesearch=true`);
-      return await res.json();
-    });
+    const data = yield call(() => pixbayApi.getPhotos(tags));
     yield put(photosLoaded(data.hits));
   } catch (error) {
     yield put(photosError(error));

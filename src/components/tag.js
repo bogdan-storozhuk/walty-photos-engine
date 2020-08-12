@@ -4,12 +4,13 @@ import PropTypes from 'prop-types';
 
 import { tagAdded } from '../ducks/';
 import { TagSpan } from '../styled/';
+import { generateRandomId } from '../utils/utils';
 
 const Tag = (tag) => {
   const dispatch = useDispatch();
 
   const onAddition = (tag) => {
-    dispatch(tagAdded(tag.name));
+    dispatch(tagAdded({ name: tag.name, id: generateRandomId() }));
   };
 
   return (

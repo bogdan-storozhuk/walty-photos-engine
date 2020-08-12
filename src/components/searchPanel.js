@@ -5,6 +5,7 @@ import ReactTags from 'react-tag-autocomplete';
 import { tagAdded, tagRemoved } from '../ducks';
 import { StyledLink } from '../styled';
 import getSuggestions from '../utils/suggestions';
+import { generateRandomId } from '../utils/utils';
 
 import '../vendors/reactTags.css';
 
@@ -17,7 +18,7 @@ const SearchPanel = () => {
   }, '/');
 
   const onAddition = (tag) => {
-    dispatch(tagAdded(tag.name));
+    dispatch(tagAdded({ name: tag.name, id: generateRandomId() }));
   };
 
   const onDelete = (i) => {

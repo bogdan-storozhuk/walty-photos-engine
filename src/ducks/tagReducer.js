@@ -1,7 +1,8 @@
-const TAG_ADD = 'walty-photo-engine/tags/TAG_ADD';
-const TAG_REMOVE = 'walty-photo-engine/tags/TAG_REMOVE';
-const TAGS_LOADED_FROM_URL = 'walty-photo-engine/tags/TAGS_LOADED_FROM_URL';
-const LAST_SEARCHED_TAGS_ADDED =
+export const TAG_ADD = 'walty-photo-engine/tags/TAG_ADD';
+export const TAG_REMOVE = 'walty-photo-engine/tags/TAG_REMOVE';
+export const TAGS_LOADED_FROM_URL =
+  'walty-photo-engine/tags/TAGS_LOADED_FROM_URL';
+export const LAST_SEARCHED_TAGS_ADDED =
   'walty-photo-engine/tags/LAST_SEARCHED_TAGS_ADDED';
 
 const initialState = {
@@ -49,12 +50,9 @@ const tagReducer = (state = initialState, action) => {
 
 export default tagReducer;
 
-export const tagAdded = (name) => ({
+export const tagAdded = (tag) => ({
   type: TAG_ADD,
-  payload: {
-    name,
-    id: Date.now() + Math.floor(Math.random() * 1000),
-  },
+  payload: tag,
 });
 
 export const tagRemoved = (numberInTagArray) => ({
