@@ -44,29 +44,21 @@ const photoReducer = (state = initialState, action) => {
 
 export default photoReducer;
 
-export const photosLoaded = (newPhotos) => {
-  return {
-    type: LOAD_SUCCESS,
-    payload: newPhotos,
-  };
-};
-export const photosRequested = () => {
-  return {
-    type: LOAD_REQUEST,
-  };
-};
-export const photosError = (error) => {
-  return {
-    type: LOAD_FAILURE,
-    payload: error,
-  };
-};
-export const photoLoadStart = (tags) => {
-  return {
-    type: LOAD_START,
-    payload: tags,
-  };
-};
+export const photosLoaded = (newPhotos) => ({
+  type: LOAD_SUCCESS,
+  payload: newPhotos,
+});
+export const photosRequested = () => ({
+  type: LOAD_REQUEST,
+});
+export const photosError = (error) => ({
+  type: LOAD_FAILURE,
+  payload: error,
+});
+export const photoLoadStart = (tags) => ({
+  type: LOAD_START,
+  payload: tags,
+});
 
 function* fetchPhotosAsync(action) {
   try {

@@ -11,9 +11,9 @@ const LastSearchesPanel = () => {
     <Fragment>
       <p>3 last search</p>
       <div>
-        {lastSearchedTags.map((tag) => {
-          return <Tag key={tag.id} name={tag.name} />;
-        })}
+        {lastSearchedTags.map((tag) => (
+          <Tag key={tag.id} name={tag.name} />
+        ))}
       </div>
     </Fragment>
   );

@@ -49,33 +49,25 @@ const tagReducer = (state = initialState, action) => {
 
 export default tagReducer;
 
-export const tagAdded = (name) => {
-  return {
-    type: TAG_ADD,
-    payload: {
-      name,
-      id: Date.now() + Math.floor(Math.random() * 1000),
-    },
-  };
-};
+export const tagAdded = (name) => ({
+  type: TAG_ADD,
+  payload: {
+    name,
+    id: Date.now() + Math.floor(Math.random() * 1000),
+  },
+});
 
-export const tagRemoved = (numberInTagArray) => {
-  return {
-    type: TAG_REMOVE,
-    payload: numberInTagArray,
-  };
-};
+export const tagRemoved = (numberInTagArray) => ({
+  type: TAG_REMOVE,
+  payload: numberInTagArray,
+});
 
-export const loadTagsFromURL = (tags) => {
-  return {
-    type: TAGS_LOADED_FROM_URL,
-    payload: tags,
-  };
-};
+export const loadTagsFromURL = (tags) => ({
+  type: TAGS_LOADED_FROM_URL,
+  payload: tags,
+});
 
-export const lastSearchedTagAdded = (tags) => {
-  return {
-    type: LAST_SEARCHED_TAGS_ADDED,
-    payload: tags,
-  };
-};
+export const lastSearchedTagAdded = (tags) => ({
+  type: LAST_SEARCHED_TAGS_ADDED,
+  payload: tags,
+});

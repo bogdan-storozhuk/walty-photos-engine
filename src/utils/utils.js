@@ -6,11 +6,9 @@ const deleteUndefinedValuesFromObject = (obj) => {
   }
 };
 const transformObjectIntoArray = (obj) => {
-  return Object.values(obj).map((item) => {
-    return {
-      name: item,
-      id: Date.now() + Math.floor(Math.random() * 1000),
-    };
-  });
+  return Object.values(obj).map((item) => ({
+    name: item,
+    id: Date.now() + Math.floor(Math.random() * 1000),
+  }));
 };
 export { deleteUndefinedValuesFromObject, transformObjectIntoArray };

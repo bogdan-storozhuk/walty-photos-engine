@@ -9,10 +9,7 @@ const App = () => (
     <Route path="/" component={MainPage} exact />
     <Route
       path="/:tag1?/:tag2?/:tag3?/:tag4?/:tag5?/:tag6?/:tag7?/:tag8?/:tag9?/:tag10?"
-      render={({ match }) => {
-        const { params } = match;
-        return <MainPage tags={params} />;
-      }}
+      render={({ match }) => <MainPage tags={match.params} />}
     />
   </Switch>
 );

@@ -8,9 +8,9 @@ import { ErrorIndicator } from './';
 
 const Gallery = ({ photos }) => (
   <div className="row mt-3">
-    {photos.map((photo) => {
-      return <GalleryItem key={photo.id} photo={photo} />;
-    })}
+    {photos.map((photo) => (
+      <GalleryItem key={photo.id} photo={photo} />
+    ))}
   </div>
 );
 
