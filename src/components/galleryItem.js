@@ -1,16 +1,25 @@
 import React from 'react';
+import { useHistory } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 import { GalleryItemContainer, GalleryItemImage } from '../styled/';
 
-const GalleryItem = ({ photo }) => (
-  <GalleryItemContainer className="col-lg-3 col-md-4 col-6 mb-4">
-    <GalleryItemImage
-      src={photo.largeImageURL}
-      alt={photo.id}
-    ></GalleryItemImage>
-  </GalleryItemContainer>
-);
+const GalleryItem = ({ photo }) => {
+  const history = useHistory();
+  const handler = () => {
+    history.push(`/photo-page/${photo.id}`);
+  };
+
+  return (
+    <GalleryItemContainer className="col-lg-3 col-md-4 col-6 mb-4">
+      <GalleryItemImage
+        onClick={handler}
+        src={photo.largeImageURL}
+        alt={photo.id}
+      />
+    </GalleryItemContainer>
+  );
+};
 
 GalleryItem.propTypes = {
   photo: PropTypes.shape({

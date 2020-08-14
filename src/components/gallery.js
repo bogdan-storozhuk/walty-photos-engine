@@ -6,7 +6,7 @@ import { GalleryItem } from './';
 import { Spinner } from './';
 import { ErrorIndicator } from './';
 
-const Gallery = ({ photos }) => (
+export const Gallery = ({ photos }) => (
   <div className="row mt-3">
     {photos.map((photo) => (
       <GalleryItem key={photo.id} photo={photo} />
@@ -15,9 +15,10 @@ const Gallery = ({ photos }) => (
 );
 
 const GalleryContainer = () => {
-  const photos = useSelector((state) => state.photoReducer.photos),
-    loading = useSelector((state) => state.photoReducer.loading),
-    error = useSelector((state) => state.photoReducer.error);
+  const photos = useSelector((state) => state.photoReducer.photos);
+  const loading = useSelector((state) => state.photoReducer.loading);
+  const error = useSelector((state) => state.photoReducer.error);
+
   if (loading) {
     return <Spinner />;
   }

@@ -2,7 +2,7 @@ import {
   photosLoaded,
   photosRequested,
   photosError,
-  photoLoadStart,
+  photosLoadStart,
   LOAD_START,
   LOAD_REQUEST,
   LOAD_SUCCESS,
@@ -10,13 +10,13 @@ import {
 } from '../../ducks/';
 
 describe('Photo ActionCreators', () => {
-  it('photoLoadStart(): Should attach tags data to start searching for images', () => {
+  it('photosLoadStart(): Should attach tags data to start searching for images', () => {
     const tags = 'test data';
     const expectedAction = {
       type: LOAD_START,
       payload: tags,
     };
-    expect(photoLoadStart(tags)).toEqual(expectedAction);
+    expect(photosLoadStart(tags)).toEqual(expectedAction);
   });
 
   it('photosRequested(): Should create an action to set Loading', () => {

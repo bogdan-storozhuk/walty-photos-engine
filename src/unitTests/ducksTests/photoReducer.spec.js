@@ -12,6 +12,7 @@ describe('Photo reducer', () => {
       photos: [],
       loading: false,
       error: null,
+      searchedPhoto: null,
     });
   });
 
@@ -23,6 +24,7 @@ describe('Photo reducer', () => {
       photos: [],
       loading: true,
       error: null,
+      searchedPhoto: null,
     });
   });
 

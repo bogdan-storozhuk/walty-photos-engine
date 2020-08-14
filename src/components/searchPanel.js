@@ -13,22 +13,20 @@ const SearchPanel = () => {
   const reactTags = React.createRef();
   const dispatch = useDispatch();
   const tags = useSelector((state) => state.tagReducer.tags);
-  const path = tags.reduce((sum, current) => {
-    return sum + `${current.name}/`;
-  }, '/');
+  const path = tags.reduce((sum, current) => sum + `${current.name}/`, '/');
 
   const onAddition = (tag) => {
     dispatch(tagAdded({ name: tag.name, id: generateRandomId() }));
   };
 
-  const onDelete = (i) => {
-    dispatch(tagRemoved(i));
+  const onDelete = (numberInTagArray) => {
+    dispatch(tagRemoved(numberInTagArray));
   };
+
   const onSearch = () => {
     const lastTags = tags.slice(-3);
-    localStorage.clear();
-    for (let tag of lastTags) {
-      localStorage.setItem(tag.id, tag.name);
+    for (let index in lastTags) {
+      localStorage.setItem(index, lastTags[index].name);
     }
   };
 

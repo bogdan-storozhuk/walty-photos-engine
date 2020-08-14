@@ -15,8 +15,10 @@ import photoReducer, {
   photosLoaded,
   photosRequested,
   photosError,
-  photoLoadStart,
+  photosLoadStart,
+  singlePhotoStart,
   watchFetchPhotos,
+  watchFetchSinglePhoto,
   LOAD_START,
   LOAD_REQUEST,
   LOAD_SUCCESS,
@@ -36,7 +38,8 @@ export {
   photosLoaded,
   photosRequested,
   photosError,
-  photoLoadStart,
+  photosLoadStart,
+  singlePhotoStart,
   photoReducer,
   tagReducer,
   LOAD_START,
@@ -50,5 +53,5 @@ export {
 };
 
 export function* rootSaga() {
-  yield all([watchFetchPhotos()]);
+  yield all([watchFetchPhotos(), watchFetchSinglePhoto()]);
 }

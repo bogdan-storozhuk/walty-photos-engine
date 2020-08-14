@@ -5,12 +5,12 @@ import PropTypes from 'prop-types';
 
 import {
   loadTagsFromURL,
-  photoLoadStart,
+  photosLoadStart,
   lastSearchedTagAdded,
 } from '../ducks';
 import { SearchPanel } from '.';
 import { LastSearchesPanel } from '.';
-import { Gallery } from '.';
+import { GalleryContainer } from '.';
 import {
   deleteUndefinedValuesFromObject,
   transformObjectIntoArray,
@@ -18,6 +18,7 @@ import {
 
 const MainPage = ({ tags }) => {
   const dispatch = useDispatch();
+
   useEffect(() => {
     if (tags) {
       const lastSearchedTags = { ...localStorage };
@@ -26,14 +27,15 @@ const MainPage = ({ tags }) => {
       const tagArray = transformObjectIntoArray(tags);
       dispatch(lastSearchedTagAdded(lastSearchedTagsArray));
       dispatch(loadTagsFromURL(tagArray));
-      dispatch(photoLoadStart(tagArray));
+      dispatch(photosLoadStart(tagArray));
     }
   }, [dispatch, tags]);
+
   return (
     <Container>
       <SearchPanel />
       <LastSearchesPanel />
-      <Gallery />
+      <GalleryContainer />
     </Container>
   );
 };
