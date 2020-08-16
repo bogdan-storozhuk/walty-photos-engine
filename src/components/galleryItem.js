@@ -6,14 +6,15 @@ import { GalleryItemContainer, GalleryItemImage } from '../styled/';
 
 const GalleryItem = ({ photo }) => {
   const history = useHistory();
-  const handler = () => {
+
+  const loadNewRoute = () => {
     history.push(`/photo-page/${photo.id}`);
   };
 
   return (
     <GalleryItemContainer className="col-lg-3 col-md-4 col-6 mb-4">
       <GalleryItemImage
-        onClick={handler}
+        onClick={loadNewRoute}
         src={photo.largeImageURL}
         alt={photo.id}
       />

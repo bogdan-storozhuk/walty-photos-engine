@@ -1,0 +1,5 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`LastSearchesPanel Component with lastSearchedTags in State Should render properly 1`] = `ReactWrapper {}`;
+
+exports[`LastSearchesPanel Component without lastSearchedTags in State Should render properly 1`] = `ReactWrapper {}`;

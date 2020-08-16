@@ -1,0 +1,3 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ErrorIndicator Component ErrorIndicator Component initial Should render properly 1`] = `ShallowWrapper {}`;

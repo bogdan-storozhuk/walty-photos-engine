@@ -1,0 +1,5 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ErrorBoundry Component ErrorBoundry Component has NO error and displays children Should render properly 1`] = `ShallowWrapper {}`;
+
+exports[`ErrorBoundry Component ErrorBoundry Component has error Should render properly 1`] = `ShallowWrapper {}`;

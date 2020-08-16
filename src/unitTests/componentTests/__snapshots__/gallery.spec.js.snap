@@ -1,3 +1,11 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`GalleryContainer Component GalleryContainer Loading renders properly 1`] = `ShallowWrapper {}`;
+exports[`Gallery Component Gallery Component initial Should render properly 1`] = `ShallowWrapper {}`;
+
+exports[`Gallery Component Gallery Component render check Should render properly 1`] = `ShallowWrapper {}`;
+
+exports[`GalleryContainer Component GalleryContainer Loading Should render properly 1`] = `ReactWrapper {}`;
+
+exports[`GalleryContainer Component GalleryContainer render Gallery Should render properly 1`] = `ReactWrapper {}`;
+
+exports[`GalleryContainer Component GalleryContainer with errorMsg Should render properly 1`] = `ReactWrapper {}`;

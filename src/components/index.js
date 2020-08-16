@@ -8,7 +8,7 @@ import MainPage from './mainPage';
 import SearchPanel from './searchPanel';
 import Spinner from './spinner';
 import Tag from './tag';
-import PhotoPage from './photoPage';
+import PhotoPageContainer, { PhotoPage } from './photoPage';
 
 export {
   App,
@@ -22,5 +22,6 @@ export {
   ErrorBoundry,
   ErrorIndicator,
   Spinner,
+  PhotoPageContainer,
   PhotoPage,
 };

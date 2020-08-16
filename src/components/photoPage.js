@@ -7,41 +7,39 @@ import { singlePhotoStart } from '../ducks/';
 import { Spinner, ErrorIndicator } from '../components/';
 import { StyledImageContainer, StyledImage } from '../styled/';
 
-const PhotoPage = ({ singlePhoto }) => {
-  return (
-    <Container className="mt-4">
-      <StyledImageContainer>
-        <StyledImage
-          className="img-fluid mx-auto d-block"
-          src={singlePhoto.largeImageURL}
-          alt={singlePhoto.id}
-        />
-      </StyledImageContainer>
-      <div className="table-responsive mt-2">
-        <table className="table table-bordered">
-          <thead>
-            <tr>
-              <th>Downloads</th>
-              <th>Favorites</th>
-              <th>Likes</th>
-              <th>Views</th>
-              <th>Tags</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>{singlePhoto.downloads}</td>
-              <td>{singlePhoto.favorites}</td>
-              <td>{singlePhoto.likes}</td>
-              <td>{singlePhoto.views}</td>
-              <td>{singlePhoto.tags}</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </Container>
-  );
-};
+export const PhotoPage = ({ singlePhoto }) => (
+  <Container className="mt-4">
+    <StyledImageContainer>
+      <StyledImage
+        className="img-fluid mx-auto d-block"
+        src={singlePhoto.largeImageURL}
+        alt={singlePhoto.id}
+      />
+    </StyledImageContainer>
+    <div className="table-responsive mt-2">
+      <table className="table table-bordered">
+        <thead>
+          <tr>
+            <th>Downloads</th>
+            <th>Favorites</th>
+            <th>Likes</th>
+            <th>Views</th>
+            <th>Tags</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>{singlePhoto.downloads}</td>
+            <td>{singlePhoto.favorites}</td>
+            <td>{singlePhoto.likes}</td>
+            <td>{singlePhoto.views}</td>
+            <td>{singlePhoto.tags}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </Container>
+);
 
 PhotoPage.propTypes = {
   singlePhoto: PropTypes.shape({

@@ -1,45 +1,67 @@
 import React from 'react';
-import * as ReactReduxHooks from 'react-redux';
+import { Provider } from 'react-redux';
 import configureMockStore from 'redux-mock-store';
 import Adapter from 'enzyme-adapter-react-16';
-import { shallow, configure } from 'enzyme';
+import { shallow, configure, mount } from 'enzyme';
+
 import { GalleryContainer, Gallery } from '../../components';
+import { galleryPropTypes } from '../../utils/propTypes';
+import { checkProps } from '../../utils/utils';
 
 configure({ adapter: new Adapter() });
 
-let useEffect;
-
-const mockUseEffect = () => {
-  useEffect.mockImplementationOnce((f) => f());
-};
-
-const setUpMockStore = (state) => {
-  let store = configureMockStore([])(state);
-  /* mocking useEffect */
-  useEffect = jest.spyOn(React, 'useEffect');
-  mockUseEffect(); // 2 times
-  mockUseEffect(); //
-  /* mocking useSelector on our mock store */
-  jest
-    .spyOn(ReactReduxHooks, 'useSelector')
-    .mockImplementation((state) => store.getState());
-  /* mocking useDispatch on our mock store  */
-  jest
-    .spyOn(ReactReduxHooks, 'useDispatch')
-    .mockImplementation(() => store.dispatch);
-  /* shallow rendering */
-  return store;
-};
+let mockStore = configureMockStore([]);
 
 describe('Gallery Component', () => {
-  const props = {
-    photos: [],
-  };
+  describe('Checking PropTypes', () => {
+    it('Should not throw a warning', () => {
+      const expectedProps = [
+        {
+          largeImageURL: 'some url',
+          id: 1,
+        },
+      ];
+      const propsError = checkProps(Gallery, expectedProps, galleryPropTypes);
+      expect(propsError).toBeUndefined();
+    });
+  });
+
   describe('Gallery Component initial', () => {
+    const props = {
+      photos: [],
+    };
     const gallery = shallow(<Gallery {...props} />);
 
-    it('render initial', () => {
+    it('Should render initial', () => {
       expect(gallery.find('GalleryItem')).toHaveLength(0);
+    });
+
+    it('Should render properly', () => {
+      expect(gallery).toMatchSnapshot();
+    });
+  });
+
+  describe('Gallery Component render check', () => {
+    const props = {
+      photos: [
+        {
+          largeImageURL: 'some url1',
+          id: 1,
+        },
+        {
+          largeImageURL: 'some url2',
+          id: 2,
+        },
+      ],
+    };
+    const gallery = shallow(<Gallery {...props} />);
+
+    it('Should render 2 GalleryItem', () => {
+      expect(gallery.find('GalleryItem')).toHaveLength(2);
+    });
+
+    it('Should render properly', () => {
+      expect(gallery).toMatchSnapshot();
     });
   });
 });
@@ -48,11 +70,12 @@ describe('GalleryContainer Component', () => {
   const initialState = {
     photoReducer: {
       searchedPhoto: null,
-      photo: [],
+      photos: [],
       loading: false,
       error: null,
     },
   };
+
   describe('GalleryContainer Loading', () => {
     const nextState = {
       ...initialState,
@@ -61,22 +84,26 @@ describe('GalleryContainer Component', () => {
         loading: true,
       },
     };
-    const store = setUpMockStore(nextState);
-    const wrapper = shallow(<GalleryContainer store={store} />);
+    const store = mockStore(nextState);
+    const wrapper = mount(
+      <Provider store={store}>
+        <GalleryContainer />
+      </Provider>
+    );
 
-    it('Renders Spinner', () => {
+    it('Should renders Spinner', () => {
       expect(wrapper.find('Spinner')).toHaveLength(1);
     });
 
-    it('not render <ErrorIndicator />', () => {
+    it('Should NOT render <ErrorIndicator />', () => {
       expect(wrapper.find('ErrorIndicator')).toHaveLength(0);
     });
 
-    it('not render <Gallery/>', () => {
+    it('Should NOT render <Gallery/>', () => {
       expect(wrapper.find('Gallery')).toHaveLength(0);
     });
 
-    it('renders properly', () => {
+    it('Should render properly', () => {
       expect(wrapper).toMatchSnapshot();
     });
   });
@@ -89,15 +116,59 @@ describe('GalleryContainer Component', () => {
         error: 'some error',
       },
     };
-    console.log(nextState);
-    const store = setUpMockStore(nextState);
-    const wrapper = shallow(<GalleryContainer store={store} />);
+    const store = mockStore(nextState);
+    const wrapper = mount(
+      <Provider store={store}>
+        <GalleryContainer />
+      </Provider>
+    );
 
-    it('Renders ErrorIndicator', () => {
+    it('Should renders ErrorIndicator', () => {
       expect(wrapper.find('ErrorIndicator')).toHaveLength(1);
     });
-    it('Renders Spinner', () => {
+
+    it('Should NOT render Spinner', () => {
       expect(wrapper.find('Spinner')).toHaveLength(0);
+    });
+
+    it('Should NOT render <Gallery/>', () => {
+      expect(wrapper.find('Gallery')).toHaveLength(0);
+    });
+
+    it('Should render properly', () => {
+      expect(wrapper).toMatchSnapshot();
+    });
+  });
+
+  describe('GalleryContainer render Gallery', () => {
+    const nextState = {
+      ...initialState,
+      photoReducer: {
+        ...initialState.photoReducer,
+        photos: [{ largeImageURL: 'some url', id: 1 }],
+      },
+    };
+    const store = mockStore(nextState);
+    const wrapper = mount(
+      <Provider store={store}>
+        <GalleryContainer />
+      </Provider>
+    );
+
+    it('Should NOT render ErrorIndicator', () => {
+      expect(wrapper.find('ErrorIndicator')).toHaveLength(0);
+    });
+
+    it('Should NOT render Spinner', () => {
+      expect(wrapper.find('Spinner')).toHaveLength(0);
+    });
+
+    it('Should render <Gallery/>', () => {
+      expect(wrapper.find('Gallery')).toHaveLength(1);
+    });
+
+    it('Should render properly', () => {
+      expect(wrapper).toMatchSnapshot();
     });
   });
 });

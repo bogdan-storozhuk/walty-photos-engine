@@ -2,7 +2,7 @@ import React from 'react';
 import { Route, Switch } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-import { MainPage, PhotoPage } from '.';
+import { MainPage, PhotoPageContainer } from '.';
 
 const App = () => (
   <Switch>
@@ -11,7 +11,7 @@ const App = () => (
       path="/photo-page/:id"
       render={({ match }) => {
         const { id } = match.params;
-        return <PhotoPage photoId={id} />;
+        return <PhotoPageContainer photoId={id} />;
       }}
       exact
     />

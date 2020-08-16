@@ -8,6 +8,7 @@ import {
 describe('Photo reducer', () => {
   it('Should return default state without any changes done to it', () => {
     const newState = photoReducer(undefined, {});
+
     expect(newState).toEqual({
       photos: [],
       loading: false,
@@ -20,6 +21,7 @@ describe('Photo reducer', () => {
     const newState = photoReducer(undefined, {
       type: LOAD_REQUEST,
     });
+
     expect(newState).toEqual({
       photos: [],
       loading: true,
@@ -34,9 +36,11 @@ describe('Photo reducer', () => {
       loading: false,
       error: 'Unknown error',
     };
+
     const newState = photoReducer(initialStateWithError, {
       type: LOAD_REQUEST,
     });
+
     expect(newState).toEqual({
       ...initialStateWithError,
       loading: true,
@@ -56,6 +60,7 @@ describe('Photo reducer', () => {
       type: LOAD_SUCCESS,
       payload: newPhotos,
     });
+
     expect(newState).toEqual({
       ...initialState,
       photos: newPhotos,
@@ -75,6 +80,7 @@ describe('Photo reducer', () => {
       type: LOAD_FAILURE,
       payload: error,
     });
+
     expect(newState).toEqual({
       ...initialState,
       loading: false,
