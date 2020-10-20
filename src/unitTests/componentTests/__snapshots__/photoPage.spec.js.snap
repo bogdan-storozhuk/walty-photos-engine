@@ -1,0 +1,9 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`PhotoPage Component PhotoPage Component initial Should render properly 1`] = `ShallowWrapper {}`;
+
+exports[`PhotoPageContainer Component PhotoPageContainer Loading Should render properly 1`] = `ReactWrapper {}`;
+
+exports[`PhotoPageContainer Component PhotoPageContainer render PhotoPage Should render properly 1`] = `ReactWrapper {}`;
+
+exports[`PhotoPageContainer Component PhotoPageContainer with errorMsg Should render properly 1`] = `ReactWrapper {}`;

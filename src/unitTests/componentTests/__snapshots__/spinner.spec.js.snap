@@ -1,0 +1,3 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Spinner Component Spinner Component initial Should render properly 1`] = `ShallowWrapper {}`;
